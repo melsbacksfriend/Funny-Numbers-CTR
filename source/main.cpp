@@ -7,22 +7,31 @@ int main(int argc, char **argv) {
 
 	int number = 1;
 
-    while(aptMainLoop()) {
-        gspWaitForVBlank();
-        hidScanInput();
 
-        if(hidKeysDown() & KEY_START)
-            break;
-
+               
 		while (number >= 0) {
+                if(hidKeysDown() & KEY_START)
+                    break;
+ 
+                hidScanInput();
+                                if(hidKeysDown() & KEY_A)
+                                    number = 1;
+
 				std::cout << number << std::endl;
 				number++;
-	}
+
+}
+
+
+    while(aptMainLoop()) {
+        gspWaitForVBlank();
+
+                hidScanInput();
+
 
         gfxFlushBuffers();
         gfxSwapBuffers();
     }
-
     gfxExit();
     return 0;
 }
